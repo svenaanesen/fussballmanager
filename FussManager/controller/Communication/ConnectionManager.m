@@ -194,12 +194,17 @@
 
 - (void)getAllMatches
 {
-
+    NSMutableString *post = [[NSMutableString alloc] initWithString:@""];
+    [activeConnections addObject:CONNECTION_URL_GET_MATCHES];
+    [communicator sendRequest:post toURL:CONNECTION_URL_GET_MATCHES];
 }
 
 - (void)getAllResults
 {
-
+    
+    NSMutableString *post = [[NSMutableString alloc] initWithString:@""];
+    [activeConnections addObject:CONNECTION_URL_GET_RESULTS];
+    [communicator sendRequest:post toURL:CONNECTION_URL_GET_RESULTS];
 }
 
 
