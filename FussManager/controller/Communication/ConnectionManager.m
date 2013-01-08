@@ -64,18 +64,18 @@
     if (activeConnections.count > 0) {
         NSString *activeConnectionType = [activeConnections objectAtIndex:0];
         if ([activeConnectionType isEqualToString:CONNECTION_URL_ADD_USER]) {
-            // notify about the completed loading
-            [[NotificationManager getInstance] notifyListeners:NotificationPlayerSavedSuccessfully object:[resultArray objectAtIndex:0] userInfo:nil];
-            
             // update the list of current users in DB
             [self getAllPlayers];
             
-        } else if ([activeConnectionType isEqualToString:CONNECTION_URL_ADD_MATCH]) {
             // notify about the completed loading
-            [[NotificationManager getInstance] notifyListeners:NotificationMatchSavedSuccessfully object:[resultArray objectAtIndex:0] userInfo:nil];
+            [[NotificationManager getInstance] notifyListeners:NotificationPlayerSavedSuccessfully object:[resultArray objectAtIndex:0] userInfo:nil];
             
+        } else if ([activeConnectionType isEqualToString:CONNECTION_URL_ADD_MATCH]) {
             // update the list of current users in DB
             [[AppModel getAppModel] parseAndSetPlayers:[resultArray objectAtIndex:0]];
+            
+            // notify about the completed loading
+            [[NotificationManager getInstance] notifyListeners:NotificationMatchSavedSuccessfully object:[resultArray objectAtIndex:0] userInfo:nil];
             
         } else if ([activeConnectionType isEqualToString:CONNECTION_URL_ADD_TEAM]) {
             // notify about the completed loading
@@ -96,6 +96,21 @@
         } else if ([activeConnectionType isEqualToString:CONNECTION_URL_GET_ALL_TEAMS]) {
             // update the list of current users in DB
             [[AppModel getAppModel] parseAndSetTeams:[resultArray objectAtIndex:0]];
+            
+        } else if ([activeConnectionType isEqualToString:CONNECTION_URL_GET_MATCHES]) {
+            // update the list of current users in DB
+            [[AppModel getAppModel] parseAndSetMatches:[resultArray objectAtIndex:0]];
+            
+            // notify about the completed loading
+            [[NotificationManager getInstance] notifyListeners:NotificationAllMatchesRecieved object:[resultArray objectAtIndex:0] userInfo:nil];
+            
+        } else if ([activeConnectionType isEqualToString:CONNECTION_URL_GET_RESULTS]) {
+            // update the list of current users in DB
+            [[AppModel getAppModel] parseAndSetResults:[resultArray objectAtIndex:0]];
+            
+            // notify about the completed loading
+            [[NotificationManager getInstance] notifyListeners:NotificationAllResultsRecieved object:[resultArray objectAtIndex:0] userInfo:nil];
+            
         }
         [activeConnections removeObjectAtIndex:0];
     }
@@ -140,7 +155,6 @@
 - (NSString *)addTeamWithName:(NSString *)teamName withPlayerOneId:(NSString *)player1id andPlayerTwoId:(NSString *)player2id
 {    
     NSMutableString *post = [[NSMutableString alloc] initWithString:@""];
-    NSString *matchid = [NSString stringWithFormat:@"%i", (int)[NSDate timeIntervalSinceReferenceDate]];
     [post appendFormat:@"teamid=%@", [teamName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [post appendFormat:@"&userid_1=%@", player1id];
     [post appendFormat:@"&userid_2=%@", player2id];

@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E3829A99169ABF1D007D221C /* StatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3829A98169ABF1D007D221C /* StatisticsViewController.m */; };
+		E3829AA6169AC46E007D221C /* MatchesView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3829AA5169AC46E007D221C /* MatchesView.m */; };
+		E3829AA9169AC549007D221C /* Herculanum.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E3829AA8169AC549007D221C /* Herculanum.ttf */; };
+		E3829AAC169AD83D007D221C /* MatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3829AAB169AD83D007D221C /* MatchTableViewCell.m */; };
+		E3829AAF169B12FB007D221C /* PointsResultsView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3829AAE169B12FA007D221C /* PointsResultsView.m */; };
+		E3829AB2169B16F2007D221C /* PointsResulsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3829AB1169B16F2007D221C /* PointsResulsViewCell.m */; };
+		E3829AB5169B1890007D221C /* StatisticsVO.m in Sources */ = {isa = PBXBuildFile; fileRef = E3829AB4169B1890007D221C /* StatisticsVO.m */; };
 		E3E1004C168499A7007C93B9 /* Communicator.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E1FFE4168499A7007C93B9 /* Communicator.m */; };
 		E3E1004D168499A7007C93B9 /* ConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E1FFE7168499A7007C93B9 /* ConnectionManager.m */; };
 		E3E1004E168499A7007C93B9 /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E3E1FFEA168499A7007C93B9 /* NotificationManager.m */; };
@@ -88,6 +95,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E3829A97169ABF1D007D221C /* StatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatisticsViewController.h; path = statistics/StatisticsViewController.h; sourceTree = "<group>"; };
+		E3829A98169ABF1D007D221C /* StatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatisticsViewController.m; path = statistics/StatisticsViewController.m; sourceTree = "<group>"; };
+		E3829AA4169AC46E007D221C /* MatchesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchesView.h; path = match/MatchesView.h; sourceTree = "<group>"; };
+		E3829AA5169AC46E007D221C /* MatchesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchesView.m; path = match/MatchesView.m; sourceTree = "<group>"; };
+		E3829AA8169AC549007D221C /* Herculanum.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Herculanum.ttf; sourceTree = "<group>"; };
+		E3829AAA169AD83D007D221C /* MatchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchTableViewCell.h; path = match/MatchTableViewCell.h; sourceTree = "<group>"; };
+		E3829AAB169AD83D007D221C /* MatchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchTableViewCell.m; path = match/MatchTableViewCell.m; sourceTree = "<group>"; };
+		E3829AAD169B12FA007D221C /* PointsResultsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PointsResultsView.h; path = statistics/PointsResultsView.h; sourceTree = "<group>"; };
+		E3829AAE169B12FA007D221C /* PointsResultsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PointsResultsView.m; path = statistics/PointsResultsView.m; sourceTree = "<group>"; };
+		E3829AB0169B16F1007D221C /* PointsResulsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PointsResulsViewCell.h; path = statistics/PointsResulsViewCell.h; sourceTree = "<group>"; };
+		E3829AB1169B16F2007D221C /* PointsResulsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PointsResulsViewCell.m; path = statistics/PointsResulsViewCell.m; sourceTree = "<group>"; };
+		E3829AB3169B1890007D221C /* StatisticsVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticsVO.h; sourceTree = "<group>"; };
+		E3829AB4169B1890007D221C /* StatisticsVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticsVO.m; sourceTree = "<group>"; };
 		E3E10000168499A7007C93B9 /* SBJsonStreamWriterAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterAccumulator.m; sourceTree = "<group>"; };
 		E3E10001168499A7007C93B9 /* SBJsonStreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterState.h; sourceTree = "<group>"; };
 		E3E10002168499A7007C93B9 /* SBJsonStreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterState.m; sourceTree = "<group>"; };
@@ -215,6 +235,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E3829A9B169AC18D007D221C /* matches */ = {
+			isa = PBXGroup;
+			children = (
+				E3829AA4169AC46E007D221C /* MatchesView.h */,
+				E3829AA5169AC46E007D221C /* MatchesView.m */,
+				E3829AAA169AD83D007D221C /* MatchTableViewCell.h */,
+				E3829AAB169AD83D007D221C /* MatchTableViewCell.m */,
+				E3829AAD169B12FA007D221C /* PointsResultsView.h */,
+				E3829AAE169B12FA007D221C /* PointsResultsView.m */,
+				E3829AB0169B16F1007D221C /* PointsResulsViewCell.h */,
+				E3829AB1169B16F2007D221C /* PointsResulsViewCell.m */,
+			);
+			name = matches;
+			sourceTree = "<group>";
+		};
+		E3829AA7169AC549007D221C /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E3829AA8169AC549007D221C /* Herculanum.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		E3E10009168499A7007C93B9 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +282,8 @@
 				E3E10016168499A7007C93B9 /* ResultVO.m */,
 				E3E10017168499A7007C93B9 /* TeamVO.h */,
 				E3E10018168499A7007C93B9 /* TeamVO.m */,
+				E3829AB3169B1890007D221C /* StatisticsVO.h */,
+				E3829AB4169B1890007D221C /* StatisticsVO.m */,
 			);
 			path = ValueObjects;
 			sourceTree = "<group>";
@@ -246,6 +291,7 @@
 		E3E10019168499A7007C93B9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E3829AA7169AC549007D221C /* fonts */,
 				E3E1001A168499A7007C93B9 /* graphics */,
 			);
 			path = Resources;
@@ -381,6 +427,9 @@
 		E3E100A116849EB9007C93B9 /* statistics */ = {
 			isa = PBXGroup;
 			children = (
+				E3829A9B169AC18D007D221C /* matches */,
+				E3829A97169ABF1D007D221C /* StatisticsViewController.h */,
+				E3829A98169ABF1D007D221C /* StatisticsViewController.m */,
 			);
 			name = statistics;
 			sourceTree = "<group>";
@@ -622,6 +671,7 @@
 				E3E1008A168499A7007C93B9 /* inputfield_header_name@2x.png in Resources */,
 				E3E1008B168499A7007C93B9 /* registrationfield.png in Resources */,
 				E3E1008C168499A7007C93B9 /* registrationfield@2x.png in Resources */,
+				E3829AA9169AC549007D221C /* Herculanum.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +710,12 @@
 				E3E1009616849A3A007C93B9 /* MatchRegistrationViewController.m in Sources */,
 				E3E1009716849A3A007C93B9 /* MatchScoreView.m in Sources */,
 				E3E1009816849A3A007C93B9 /* PlayerRegistrationViewController.m in Sources */,
+				E3829A99169ABF1D007D221C /* StatisticsViewController.m in Sources */,
+				E3829AA6169AC46E007D221C /* MatchesView.m in Sources */,
+				E3829AAC169AD83D007D221C /* MatchTableViewCell.m in Sources */,
+				E3829AAF169B12FB007D221C /* PointsResultsView.m in Sources */,
+				E3829AB2169B16F2007D221C /* PointsResulsViewCell.m in Sources */,
+				E3829AB5169B1890007D221C /* StatisticsVO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

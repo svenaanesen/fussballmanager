@@ -34,6 +34,14 @@
         [self setGoals2:[NSNumber numberWithInt:[[self getValueInObject:info fromKey:@"goals_user2"] intValue]]];
     }
     
+    if ([self getValueInObject:info fromKey:@"date"]) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        
+        NSDate *__date = [dateFormatter dateFromString:[self getValueInObject:info fromKey:@"date"]];
+        [self setDate:__date];
+    }
+    
 }
 
 @end

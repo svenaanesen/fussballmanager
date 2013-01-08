@@ -14,6 +14,7 @@
 
 #define NotificationMatchSavedSuccessfully          @"NotificationMatchSavedSuccessfully"
 #define NotificationMatchSavedWithFailure           @"NotificationMatchSavedWithFailure"
+#define NotificationAllMatchesRecieved              @"NotificationAllMatchesRecieved"
 
 #define NotificationTeamSavedSuccessfully           @"NotificationTeamSavedSuccessfully"
 #define NotificationTeamSavedWithFailure            @"NotificationTeamSavedWithFailure"
@@ -23,6 +24,8 @@
 
 #define NotificationResultsSavedSuccessfully        @"NotificationResultsSavedSuccessfully"
 #define NotificationResultsSavedWithFailure         @"NotificationResultsSavedWithFailure"
+#define NotificationAllResultsRecieved              @"NotificationAllResultsRecieved"
+
 
 
 @interface NotificationManager : NSObject {}

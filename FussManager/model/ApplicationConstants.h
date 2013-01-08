@@ -25,3 +25,9 @@
 // URLs for users/players
 #define     CONNECTION_URL_ADD_TEAM         @"http://www.svenway.com/services/fussballmanager/team_insert.php"
 #define     CONNECTION_URL_GET_ALL_TEAMS    @"http://www.svenway.com/services/fussballmanager/team_get_all.php"
+
+
+#define     APPLICATION_FONT                @"Herculanum"
+#define     APPLICATION_FONT_NORMAL         @"HelveticaNeue"
+#define     APPLICATION_FONT_NORMAL_BOLD    @"HelveticaNeue-Bold"
+#define     APPLICATION_FONT_HEADER_SIZE    80

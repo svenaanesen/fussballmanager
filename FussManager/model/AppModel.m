@@ -11,6 +11,7 @@
 #import "TeamVO.h"
 #import "ResultVO.h"
 #import "ConnectionManager.h"
+#import "StatisticsVO.h"
 
 @implementation AppModel
 
@@ -199,6 +200,204 @@
     
     return teamId;
 }
+
+#pragma mark - Organize and return saved data from collected db source
+
+- (NSArray *)getAllSingelMatches
+{
+    NSMutableArray *singlematches = [[NSMutableArray alloc] init];
+    
+    for (MatchVO *match in _matches) {
+        NSString *username = [self getUserNameForId:[match userid1]];
+        if (username != nil) {
+            // this is a single match - add to list
+            [singlematches addObject:match];
+        }
+    }
+    
+    return singlematches;
+}
+
+- (NSArray *)getAllTeamMatches
+{
+    NSMutableArray *teammatches = [[NSMutableArray alloc] init];
+    
+    for (MatchVO *match in _matches) {
+        NSString *teamname = [self getTeamNameForId:[match userid1]];
+        if (teamname != nil) {
+            // this is a single match - add to list
+            [teammatches addObject:match];
+        }
+    }
+    
+    return teammatches;
+}
+
+
+- (NSString *)getUserNameForId:(NSString *)userid
+{
+    for (PlayerVO *player in _players) {
+        if ([[player id] isEqualToString:userid]) {
+            return [player name];
+        }
+    }
+    
+    return nil;
+}
+
+
+- (NSString *)getTeamNameForId:(NSString *)teamid
+{
+    for (TeamVO *team in _teams) {
+        if ([[team id] isEqualToString:teamid]) {
+            return [team teamname];
+        }
+    }
+    
+    return nil;
+}
+
+- (NSArray *)getSinglePointsStatistics
+{
+    NSMutableArray *points = [[NSMutableArray alloc] init];
+    for (PlayerVO *player in _players) {
+        StatisticsVO *statistics = [[StatisticsVO alloc] init];
+        [statistics setId:[player id]];
+        [statistics setName:[self getUserNameForId:[player id]]];
+        [statistics setTotalgames:0];
+        [statistics setTotalgoals:0];
+        [statistics setTotalpoints:0];
+        
+        // loop through results and find all registered results for this user
+        for (ResultVO *result in _results) {
+            if ([[result userid] isEqualToString:[player id]]) {
+                statistics.totalgames++;
+                statistics.totalgoals += [[result goals] intValue];
+                statistics.totalpoints += [[result points] intValue];
+            }
+        }
+        
+        // loop through matches to find countergoals and to find the last 5 matches
+        NSMutableArray *lastMatches = [NSMutableArray new];
+        for (MatchVO *match in _matches) {
+            if ([[match userid1] isEqualToString:[player id]] || [[match userid2] isEqualToString:[player id]]) {
+                // add match to last matchlist
+                [lastMatches addObject:match];
+                
+                if ([[match userid1] isEqualToString:[player id]])
+                    statistics.totalgoals -= [[match goals2] intValue];
+                else
+                    statistics.totalgoals -= [[match goals1] intValue];
+            }
+        }
+        
+        int numLastMatches = 0;
+        int numLastPoints = 0;
+        for (int i=lastMatches.count-1; i >= 0; i--) {
+            MatchVO *match = [lastMatches objectAtIndex:i];
+            numLastMatches++;
+            
+            // find the results for this user in this game
+            for (ResultVO *result in _results) {
+                if ([[result matchid] isEqualToString:[match id]] && [[result userid] isEqualToString:[player id]]) {
+                    numLastPoints += [[result points] intValue];
+                }
+            }
+            
+            if (numLastMatches == 5)
+                break;
+        }
+        
+        NSNumber *lastpointsNum = [NSNumber numberWithDouble:numLastPoints];
+        NSNumber *lastmatchesNum = [NSNumber numberWithDouble:numLastMatches];
+        
+        double lastMatchPercent = ([lastpointsNum doubleValue] / [lastmatchesNum doubleValue]) * 100;
+        statistics.lastpoints = lastMatchPercent;
+        
+        [points addObject:statistics];
+    }
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"totalpoints" ascending:NO];
+    [points sortUsingDescriptors: [NSArray arrayWithObject: sortDescriptor]];
+    
+    for (StatisticsVO *statistic in points) {
+        float score = (statistic.totalpoints / statistic.totalgames);
+        NSLog(@"%@:   games: %i  - goals: %i  - points: %i  - score: %f", statistic.name, statistic.totalgames, statistic.totalgoals, statistic.totalpoints, score);
+    }
+    
+    
+    return points;
+}
+
+- (NSArray *)getTeamPointsStatistics
+{
+    NSMutableArray *points = [[NSMutableArray alloc] init];
+    for (TeamVO *player in _teams) {
+        StatisticsVO *statistics = [[StatisticsVO alloc] init];
+        [statistics setId:[player id]];
+        [statistics setName:[self getTeamNameForId:[player id]]];
+        [statistics setTotalgames:0];
+        [statistics setTotalgoals:0];
+        [statistics setTotalpoints:0];
+        
+        // loop through results and find all registered results for this user
+        for (ResultVO *result in _results) {
+            if ([[result userid] isEqualToString:[player id]]) {
+                statistics.totalgames++;
+                statistics.totalgoals += [[result goals] intValue];
+                statistics.totalpoints += [[result points] intValue];
+            }
+        }
+        
+        // loop through matches to find countergoals
+        NSMutableArray *lastMatches = [NSMutableArray new];
+        for (MatchVO *match in _matches) {
+            if ([[match userid1] isEqualToString:[player id]] || [[match userid2] isEqualToString:[player id]]) {
+                // add match to last matchlist
+                [lastMatches addObject:match];
+                
+                if ([[match userid1] isEqualToString:[player id]])
+                    statistics.totalgoals -= [[match goals2] intValue];
+                else
+                    statistics.totalgoals -= [[match goals1] intValue];
+            }
+        }
+        
+        int numLastMatches = 0;
+        int numLastPoints = 0;
+        for (int i=lastMatches.count-1; i >= 0; i--) {
+            MatchVO *match = [lastMatches objectAtIndex:i];
+            numLastMatches++;
+            
+            // find the results for this user in this game
+            for (ResultVO *result in _results) {
+                if ([[result matchid] isEqualToString:[match id]] && [[result userid] isEqualToString:[player id]]) {
+                    numLastPoints += [[result points] intValue];
+                }
+            }
+            
+            if (numLastMatches == 5)
+                break;
+        }
+        
+        NSNumber *lastpointsNum = [NSNumber numberWithDouble:numLastPoints];
+        NSNumber *lastmatchesNum = [NSNumber numberWithDouble:numLastMatches];
+        
+        double lastMatchPercent = ([lastpointsNum doubleValue] / [lastmatchesNum doubleValue]) * 100;
+        statistics.lastpoints = lastMatchPercent;
+        
+        [points addObject:statistics];
+    }
+    
+    NSSortDescriptor *sortTotalPoints = [[NSSortDescriptor alloc] initWithKey:@"totalpoints" ascending:NO];
+    NSSortDescriptor *sortLastPoints = [[NSSortDescriptor alloc] initWithKey:@"lastpoints" ascending:NO];
+    NSSortDescriptor *sortTotalGoals = [[NSSortDescriptor alloc] initWithKey:@"totalgoals" ascending:NO];
+    NSSortDescriptor *sortTotalGames = [[NSSortDescriptor alloc] initWithKey:@"totalgames" ascending:NO];
+    [points sortUsingDescriptors: [NSArray arrayWithObjects:sortTotalPoints, sortLastPoints, sortTotalGoals, sortTotalGames, nil]];
+    
+    return points;
+}
+
 
 
 @end

@@ -7,9 +7,11 @@
 //
 
 #import "ViewController.h"
+
 #import "PlayerRegistrationViewController.h"
 #import "MatchRegistrationViewController.h"
 #import "AppModel.h"
+#import "StatisticsViewController.h"
 
 typedef enum {
     MenuButtonTypePlayer = 0,
@@ -84,7 +86,7 @@ typedef enum {
     int buttonType = [sender tag];
     if (buttonType == MenuButtonTypePlayer) {
         PlayerRegistrationViewController *playerRegistration = [[PlayerRegistrationViewController alloc] init];
-        [playerRegistration setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        [playerRegistration setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
         playerRegistration.view.frame = self.view.frame;
         [self presentViewController:playerRegistration animated:YES completion:^{
             [playerRegistration.view setUserInteractionEnabled:YES];
@@ -102,7 +104,13 @@ typedef enum {
         
         
     } else if (buttonType == MenuButtonTypeStatistics) {
-        
+        StatisticsViewController *statisticsController = [[StatisticsViewController alloc] init];
+        [statisticsController setModalTransitionStyle:UIModalTransitionStylePartialCurl];
+        statisticsController.view.frame = self.view.frame;
+        [self presentViewController:statisticsController animated:YES completion:^{
+            [statisticsController.view setUserInteractionEnabled:YES];
+            NSLog(@"statistics show");
+        }];
     }
 }
 

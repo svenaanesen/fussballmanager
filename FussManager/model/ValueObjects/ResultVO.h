@@ -14,6 +14,6 @@
 @property (strong) NSString *userid;
 @property (strong) NSNumber *points;
 @property (strong) NSNumber *goals;
-@property (strong) NSNumber *matchid;
+@property (strong) NSString *matchid;
 
 @end

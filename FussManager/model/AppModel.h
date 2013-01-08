@@ -36,4 +36,18 @@
 
 - (NSString *)getTeamIdForTeamWithPlayers:(NSArray *)playerlist;
 
+
+
+- (NSArray *)getAllSingelMatches;
+
+- (NSArray *)getAllTeamMatches;
+
+- (NSString *)getUserNameForId:(NSString *)userid;
+
+- (NSString *)getTeamNameForId:(NSString *)teamid;
+
+- (NSArray *)getSinglePointsStatistics;
+
+- (NSArray *)getTeamPointsStatistics;
+
 @end

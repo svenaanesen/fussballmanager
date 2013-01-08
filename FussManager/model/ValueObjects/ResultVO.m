@@ -31,7 +31,7 @@
     }
     
     if ([self getValueInObject:info fromKey:@"matchid"]) {
-        [self setMatchid:[NSNumber numberWithFloat:[[self getValueInObject:info fromKey:@"matchid"] floatValue]]];
+        [self setMatchid:[self getValueInObject:info fromKey:@"matchid"]];
     }
     
 }
