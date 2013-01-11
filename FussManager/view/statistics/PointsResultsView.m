@@ -112,6 +112,18 @@
     
     [sectionHeaderView addSubview:lastLabel];
     
+    xloc += 120;
+    
+    labeltext = @"poeng";
+    labelsize = [labeltext sizeWithFont:labelfont];
+    UILabel *ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(xloc, yloc, labelsize.width, labelsize.height)];
+    [ratingLabel setText:labeltext];
+    [ratingLabel setFont:labelfont];
+    [ratingLabel setTextColor:labelcolor];
+    [ratingLabel setBackgroundColor:[UIColor clearColor]];
+    
+    [sectionHeaderView addSubview:ratingLabel];
+    
     return sectionHeaderView;
 }
 

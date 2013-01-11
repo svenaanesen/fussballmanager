@@ -37,6 +37,9 @@
         [self setImagereference:[self getValueInObject:info fromKey:@"imagereference"]];
     }
     
+    // set default rating to 500
+    [self setRating:[NSNumber numberWithDouble:500]];
+    
 }
 
 

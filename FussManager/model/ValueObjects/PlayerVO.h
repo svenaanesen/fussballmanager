@@ -14,5 +14,6 @@
 @property (strong) NSString *name;
 @property (strong) NSString *department;
 @property (strong) NSString *imagereference;
+@property (strong) NSNumber *rating;
 
 @end

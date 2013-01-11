@@ -34,6 +34,8 @@
 
 - (id)getPlayerWithId:(NSString *)playerId;
 
+- (id)getSinglePlayerWithId:(NSString *)playerId;
+
 - (NSString *)getTeamIdForTeamWithPlayers:(NSArray *)playerlist;
 
 

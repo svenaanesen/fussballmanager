@@ -93,6 +93,17 @@
         [lastLabel setTextAlignment:NSTextAlignmentRight];
         
         [self addSubview:lastLabel];
+        
+        xloc += cellsize;
+        
+        // add rating points
+        ratingLabel = [[UILabel alloc] initWithFrame:CGRectMake(xloc, yloc, labelsize.width, labelsize.height)];
+        [ratingLabel setFont:cellfont];
+        [ratingLabel setTextColor:[UIColor yellowColor]];
+        [ratingLabel setBackgroundColor:[UIColor clearColor]];
+        [ratingLabel setTextAlignment:NSTextAlignmentRight];
+        
+        [self addSubview:ratingLabel];
     }
     return self;
 }
@@ -121,6 +132,9 @@
     
     // insert points number
     [lastLabel setText:[NSString stringWithFormat:@"%.1f", [statistics lastpoints]]];
+    
+    // insert points number
+    [ratingLabel setText:[NSString stringWithFormat:@"%.0f", [statistics ratingpoints]]];
     
     // insert match number
     NSNumber *points = [NSNumber numberWithDouble:[statistics totalpoints]];
@@ -165,6 +179,12 @@
     frame = lastLabel.frame;
     frame.origin.x = xloc;
     lastLabel.frame = frame;
+    
+    xloc += 100;
+    
+    frame = ratingLabel.frame;
+    frame.origin.x = xloc;
+    ratingLabel.frame = frame;
 }
 
 @end

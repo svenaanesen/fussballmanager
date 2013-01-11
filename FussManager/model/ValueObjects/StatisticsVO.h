@@ -15,6 +15,7 @@
 @property (strong) NSString *name;
 @property (readwrite) int totalpoints;
 @property (readwrite) double lastpoints;
+@property (readwrite) double ratingpoints;
 @property (readwrite) int totalgoals;
 @property (readwrite) int totalgames;
 

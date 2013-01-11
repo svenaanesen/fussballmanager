@@ -35,6 +35,9 @@
         [self setUserid2:[self getValueInObject:info fromKey:@"userid_2"]];
     }
     
+    // set default rating to 500
+    [self setRating:[NSNumber numberWithDouble:500]];
+    
 }
 
 @end

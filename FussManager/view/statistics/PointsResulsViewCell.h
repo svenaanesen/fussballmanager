@@ -18,6 +18,7 @@
     UILabel *pointsLabel;
     UILabel *totalLabel;
     UILabel *lastLabel;
+    UILabel *ratingLabel;
 }
 
 

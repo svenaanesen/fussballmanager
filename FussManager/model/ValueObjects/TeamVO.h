@@ -14,5 +14,6 @@
 @property (strong) NSString *teamname;
 @property (strong) NSString *userid1;
 @property (strong) NSString *userid2;
+@property (strong) NSNumber *rating;
 
 @end
