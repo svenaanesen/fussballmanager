@@ -364,15 +364,22 @@
             NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"rating" ascending:YES];
             [rateplayers sortUsingDescriptors: [NSArray arrayWithObject:sortDescriptor]];
             
-            int player1rate = [self getRatePointsForUser:player1 basedOnRateList:rateplayers];
-            int player2rate = [self getRatePointsForUser:player2 basedOnRateList:rateplayers];
+            int constant = rateplayers.count;
+            int player1rate = [self getRatePointsForUser:player1 basedOnRateList:rateplayers ascending:YES];
+            int player2rate = [self getRatePointsForUser:player2 basedOnRateList:rateplayers ascending:YES];
+            
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"rating" ascending:NO];
+            [rateplayers sortUsingDescriptors: [NSArray arrayWithObject:sortDescriptor]];
+            
+            int player1rateLoser = [self getRatePointsForUser:player1 basedOnRateList:rateplayers ascending:NO];
+            int player2rateLoser = [self getRatePointsForUser:player2 basedOnRateList:rateplayers ascending:NO];
             NSNumber *ratepoints;
-            if (player1rate > player2rate)
+            /*if (player1rate > player2rate)
                 ratepoints = [NSNumber numberWithDouble:(player1rate - player2rate)];
             else if (player1rate < player2rate)
                 ratepoints = [NSNumber numberWithDouble:(player2rate - player1rate)];
             else
-                ratepoints = [NSNumber numberWithInt:rateplayers.count/2];
+                ratepoints = [NSNumber numberWithInt:rateplayers.count/2];*/
             
             if ([[match goals1] intValue] > [[match goals2] intValue]) {
                 // player 1 won the game
@@ -380,26 +387,34 @@
                 NSNumber *prevPointsPlayer1 = player1.rating;
                 NSNumber *prevPointsPlayer2 = player2.rating;
                 
-                double newratePlayer1 = [prevPointsPlayer1 doubleValue] + [ratepoints doubleValue];
-                double newratePlayer2 = [prevPointsPlayer2 doubleValue] - [ratepoints doubleValue];
+                int newPoints1 = (constant - player1rate + player2rate);
+                int newPoints2 = (constant + player2rate - player1rate);
+                //int newPoints1 = player2rate;
+                //int newPoints2 = player1rateLoser;
+                double newratePlayer1 = [prevPointsPlayer1 doubleValue] + newPoints1;
+                double newratePlayer2 = [prevPointsPlayer2 doubleValue] - newPoints2;
                 
                 [player1 setRating:[NSNumber numberWithDouble:newratePlayer1]];
                 [player2 setRating:[NSNumber numberWithDouble:newratePlayer2]];
                 
-                NSLog(@"%@ (%i) vinner over %@ (%i). %@ +%f (%f)  - %@ -%f (%f)", [player1 name], player1rate, [player2 name], player2rate, [player1 name], [ratepoints doubleValue], [[player1 rating] doubleValue], [player2 name], [ratepoints doubleValue], [[player2 rating] doubleValue]);
+                NSLog(@"%@ (%i) vinner over %@ (%i). %@ +%i (%f)  - %@ -%i (%f)", [player1 name], player1rate, [player2 name], player2rate, [player1 name], newPoints1, [[player1 rating] doubleValue], [player2 name], newPoints2, [[player2 rating] doubleValue]);
             } else {
                 // player 2 won the game
                 ratepoints = [NSNumber numberWithDouble:player1rate];
                 NSNumber *prevPointsPlayer1 = player1.rating;
                 NSNumber *prevPointsPlayer2 = player2.rating;
                 
-                double newratePlayer1 = [prevPointsPlayer1 doubleValue] - [ratepoints doubleValue];
-                double newratePlayer2 = [prevPointsPlayer2 doubleValue] + [ratepoints doubleValue];
+                int newPoints1 = (constant + player1rate - player2rate);
+                int newPoints2 = (constant - player2rate + player1rate);
+                //int newPoints1 = player2rateLoser;
+                //int newPoints2 = player1rate;
+                double newratePlayer1 = [prevPointsPlayer1 doubleValue] - newPoints1;
+                double newratePlayer2 = [prevPointsPlayer2 doubleValue] + newPoints2;
                 
                 [player1 setRating:[NSNumber numberWithDouble:newratePlayer1]];
                 [player2 setRating:[NSNumber numberWithDouble:newratePlayer2]];
                 
-                NSLog(@"%@ (%i) vinner over %@ (%i). %@ +%f (%f)  - %@ -%f (%f)", [player2 name], player2rate, [player1 name], player1rate, [player2 name], [ratepoints doubleValue], [[player2 rating] doubleValue], [player1 name], [ratepoints doubleValue], [[player1 rating] doubleValue]);
+                NSLog(@"%@ (%i) vinner over %@ (%i). %@ +%i (%f)  - %@ -%i (%f)", [player2 name], player2rate, [player1 name], player1rate, [player2 name], newPoints2, [[player2 rating] doubleValue], [player1 name], newPoints1, [[player1 rating] doubleValue]);
             }
         }
     }
@@ -556,14 +571,24 @@
 }
 
 
-- (int)getRatePointsForUser:(PlayerVO *)player basedOnRateList:(NSArray *)ratedList
+- (int)getRatePointsForUser:(PlayerVO *)player basedOnRateList:(NSArray *)ratedList ascending:(BOOL)ascending
 {
     int ratepoints = 1;
     for (PlayerVO *listplayer in ratedList) {
-        if ([[listplayer rating] intValue] > [[player rating] intValue]) {
-            return ratepoints;
+        
+        if (ascending) {
+            if ([[listplayer rating] intValue] >= [[player rating] intValue]) {
+                return ratepoints;
+            }
+        } else {
+            if ([[listplayer rating] intValue] <= [[player rating] intValue]) {
+                return ratepoints;
+            }
         }
+        
+        
         ratepoints++;
+        
     }
     return ratepoints;
 }
@@ -573,7 +598,7 @@
 {
     int ratepoints = 1;
     for (TeamVO *listplayer in ratedList) {
-        if ([[listplayer rating] intValue] > [[team rating] intValue]) {
+        if ([[listplayer rating] intValue] >= [[team rating] intValue]) {
             return ratepoints;
         }
         ratepoints++;
