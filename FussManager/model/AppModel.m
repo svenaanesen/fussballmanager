@@ -387,8 +387,26 @@
                 NSNumber *prevPointsPlayer1 = player1.rating;
                 NSNumber *prevPointsPlayer2 = player2.rating;
                 
-                int newPoints1 = (constant - player1rate + player2rate);
-                int newPoints2 = (constant + player2rate - player1rate);
+                int newPoints1;
+                if (player1rate == player2rate) {
+                    newPoints1 = constant;
+                } else if (player1rate > player2rate) {
+                    newPoints1 = (constant - (ABS(player1rate - player2rate)));
+                } else {
+                    newPoints1 = (constant + (ABS(player1rate - player2rate)));
+                }
+                
+                int newPoints2;
+                if (player1rate == player2rate) {
+                    newPoints2 = constant / 2;
+                } else if (player1rate > player2rate) {
+                    newPoints2 = (constant - (ABS(player1rate - player2rate))) / 2;
+                } else {
+                    newPoints2 = (constant + (ABS(player1rate - player2rate))) / 2;
+                }
+                
+                //int newPoints1 = (constant - player1rate + player2rate);
+                //int newPoints2 = (constant + player2rate - player1rate);
                 //int newPoints1 = player2rate;
                 //int newPoints2 = player1rateLoser;
                 double newratePlayer1 = [prevPointsPlayer1 doubleValue] + newPoints1;
@@ -404,8 +422,26 @@
                 NSNumber *prevPointsPlayer1 = player1.rating;
                 NSNumber *prevPointsPlayer2 = player2.rating;
                 
-                int newPoints1 = (constant + player1rate - player2rate);
-                int newPoints2 = (constant - player2rate + player1rate);
+                int newPoints1;
+                if (player1rate == player2rate) {
+                    newPoints1 = constant / 2;
+                } else if (player1rate > player2rate) {
+                    newPoints1 = (constant + (ABS(player1rate - player2rate))) / 2;
+                } else {
+                    newPoints1 = (constant - (ABS(player1rate - player2rate))) / 2;
+                }
+                
+                int newPoints2;
+                if (player1rate == player2rate) {
+                    newPoints2 = constant;
+                } else if (player1rate > player2rate) {
+                    newPoints2 = (constant + (ABS(player1rate - player2rate)));
+                } else {
+                    newPoints2 = (constant - (ABS(player1rate - player2rate)));
+                }
+                
+                //int newPoints1 = (constant + player1rate - player2rate);
+                //int newPoints2 = (constant - player2rate + player1rate);
                 //int newPoints1 = player2rateLoser;
                 //int newPoints2 = player1rate;
                 double newratePlayer1 = [prevPointsPlayer1 doubleValue] - newPoints1;
